@@ -1,0 +1,7 @@
+{
+  "port": "COM11",
+  "dll": "C:\\Users\\Example\\VSYNCWaiter.dll",
+  "baudrate": 921600,
+  "pulse_threshold": 0.0005,
+  "warmup": 120
+}

@@ -143,7 +143,7 @@ Hue entertainment | |  | On/Off 433Mhz devices (multiple devices for every esp82
 <!-- - esp8266 alarm horn (+schematic)-->
  <!-- - Alarm (~~email notification~~ + eps8266 horn) -->
 
-## Support  
+## Support
 
 All documentation and instructions can be found over at [diyhue.readthedocs.io](https://diyhue.readthedocs.io/)
 
@@ -163,6 +163,26 @@ Our Board might already have your fix and answer ready. Have a look!
 
 > General Note:
 > Please provide some Logs to make it easier for all of us. Enable Debug by manually starting diyHue with additional `--debug true` argument.
+
+## VSYNC serial helper script
+
+Some contributors prefer to drive DLP-Link shutter glasses from Windows by
+listening for display VSYNC events and forwarding a trigger byte to a
+microcontroller over USB serial.  The new `vsync.py` helper in the repository
+wraps the same logic that has been floating around in forum threads and adds a
+configuration file so you no longer have to pass every flag each time you start
+the script.
+
+1. Copy `vsync.config.sample.json` to `vsync.config.json` and adjust the
+   `port`, `dll`, `baudrate`, and other values to match your setup.
+2. Install the script dependencies (`pip install pyserial`).
+3. Run the helper with `python vsync.py`.  Override any value at runtime by
+   passing the corresponding flag (`--port`, `--dll`, `--baudrate`,
+   `--pulse-threshold`, or `--warmup`).
+
+The script loads `VSYNCWaiter.dll`, waits for VSYNC, rate-limits the pulses
+according to the configured threshold, and writes `0xAA` to the configured
+serial port every time a valid VSYNC edge is seen.
 
 ## Stability
 
