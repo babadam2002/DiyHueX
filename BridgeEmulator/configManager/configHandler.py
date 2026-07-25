@@ -7,7 +7,15 @@ import logManager
 import yaml
 import uuid
 import weakref
-from HueObjects import Light, Group, EntertainmentConfiguration, Scene, ApiUser, Rule, ResourceLink, Schedule, Sensor, BehaviorInstance
+from HueObjects.Light import Light
+from HueObjects.Group import Group, EntertainmentConfiguration
+from HueObjects.Scene import Scene
+from HueObjects.ApiUser import ApiUser
+from HueObjects.Rule import Rule
+from HueObjects.ResourceLink import ResourceLink
+from HueObjects.Schedule import Schedule
+from HueObjects.Sensor import Sensor
+from HueObjects.BehaviorInstance import BehaviorInstance
 try:
     from time import tzset
 except ImportError:
