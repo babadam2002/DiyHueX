@@ -183,7 +183,7 @@ def entertainmentService(group, user):
                                 g = int((data[i+5] * 256 + data[i+6]) / 256)
                                 b = int((data[i+7] * 256 + data[i+8]) / 256)
                                 # A bri érték kiszámítása az RGB adatokból
-                                bri = int((r + g + b) / 3)
+                                bri = int(max(r, g, b))
                             elif data[14] == 1: #cie colorspace
                                 x = (data[i+3] * 256 + data[i+4]) / 65535
                                 y = (data[i+5] * 256 + data[i+6]) / 65535
@@ -201,7 +201,7 @@ def entertainmentService(group, user):
                                 g = int((data[i+3] * 256 + data[i+4]) / 256)
                                 b = int((data[i+5] * 256 + data[i+6]) / 256)
                                 # A bri érték kiszámítása az RGB adatokból
-                                bri = int((r + g + b) / 3)
+                                bri = int(max(r, g, b))
                             elif data[14] == 1: #cie colorspace
                                 x = (data[i+1] * 256 + data[i+2]) / 65535
                                 y = (data[i+3] * 256 + data[i+4]) / 65535
