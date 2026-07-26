@@ -189,10 +189,18 @@ def entertainmentService(group, user):
                                 y = (data[i+5] * 256 + data[i+6]) / 65535
                                 bri = int((data[i+7] * 256 + data[i+8]) / 256)
                                 r, g, b = convert_xy(x, y, bri)
-                            # A feketeszint logikája a fényerő alapján
+                             # A feketeszint logikája a fényerő alapján
                             min_brightness_threshold = options.get("min_brightness_threshold", 35)
+
                             if bri < min_brightness_threshold:
-                                r, g, b = 0, 0, 0
+                                # Megkeressük a közös fehér/szürke összetevőt (a legkisebb értéket)
+                                common_white = min(r, g, b)
+
+                                # Kivonjuk a közös fehéret mindhárom csatornából
+                                r -= common_white
+                                g -= common_white
+                                b -= common_white
+
                             send_light_data(light, r, g, b)
                         elif apiVersion == 2:
                             light = lights_v2[data[i]]["light"]
@@ -210,8 +218,16 @@ def entertainmentService(group, user):
 
                             # A feketeszint logikája a fényerő alapján
                             min_brightness_threshold = options.get("min_brightness_threshold", 35)
+
                             if bri < min_brightness_threshold:
-                                r, g, b = 0, 0, 0
+                                # Megkeressük a közös fehér/szürke összetevőt (a legkisebb értéket)
+                                common_white = min(r, g, b)
+
+                                # Kivonjuk a közös fehéret mindhárom csatornából
+                                r -= common_white
+                                g -= common_white
+                                b -= common_white
+
                             send_light_data(light, r, g, b)
                         if light == None:
                             logging.info("error in light identification")
